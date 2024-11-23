@@ -221,7 +221,7 @@ on:
         options:
           - ophub
           - angel
-          - yourname
+          - Junbotsang
 
 env:
   FEEDS_CONF: config/${{ inputs.source_branch }}/feeds.conf.default
