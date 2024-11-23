@@ -15,19 +15,15 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7
 sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION='R$(date +%Y.%m.%d)'|g" package/base-files/files/etc/openwrt_release
 echo "DISTRIB_SOURCECODE='immortalwrt'" >>package/base-files/files/etc/openwrt_release
 
-# Modify default IP（FROM 192.168.1.1 CHANGE TO 192.168.31.4）
-# sed -i 's/192.168.1.1/192.168.31.4/g' package/base-files/files/bin/config_generate
-#
-# ------------------------------- Main source ends -------------------------------
 
-# ------------------------------- Other started -------------------------------
-#
-# Add luci-app-amlogic
-rm -rf package/luci-app-amlogic
-git clone https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
-#
-# Apply patch
-# git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
-#
-# ------------------------------- Other ends -------------------------------
+sed -i 's/192.168.1.1/192.168.50.2/g' package/base-files/files/bin/config_generate
 
+# Add packages
+git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+git clone --depth 1 https://github.com/ophub/luci-app-amlogic package/amlogic
+git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall
+git clone --depth=1 https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
+git clone --depth=1 https://github.com/morytyann/OpenWrt-mihomo package/luci-app-mihomo
+
+rm -rf feeds/luci/themes/luci-theme-argon
+rm -rf feeds/luci/applications/openwrt-passwall
